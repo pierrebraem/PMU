@@ -1,0 +1,65 @@
+categorie:
+id int NOT NULL PRIMARY KEY
+nom varchar(25) NOT NULL
+
+produit:
+id int NOT NULL PRIMARY KEY
+nom varchar(100) NOT NULL
+description longtext NOT NULL
+prix decimal(6, 2) NOT NULL
+image varchar(255) NOT NULL
+id_categorie int NOT NULL
+
+compte:
+id int NOT NULL PRIMARY KEY
+nom varchar(50) NOT NULL
+prenom varchar(50) NOT NULL
+pays varchar(50) NULL
+adresse varchar(100) NULL
+ville varchar(50) NULL
+codepostal varchar(10) NULL
+telephone varchar(16) NOT NULL
+mail varchar(100) NOT NULL
+mdp varchar(255) NOT NULL
+
+conseil:
+id int NOT NULL PRIMARY KEY
+nom varchar(50) NOT NULL
+description longtext NOT NULL
+image varchar(255) NULL
+
+conseil_produit:
+id_conseil INT NOT NULL PRIMARY KEY
+id_produit INT NOT NULL PRIMARY KEY
+quantite INT NOT NULL
+
+panier:
+id INT NOT NULL PRIMARY KEY
+id_compte INT NOT NULL
+
+panier_produit:
+id_panier INT NOT NULL PRIMARY KEY
+id_produit INT NOT NULL PRIMARY KEY
+quantite INT NOT NULL
+
+commande:
+id INT NOT NULL PRIMARY KEY
+nom varchar(50) NOT NULL
+prenom varchar(50) NOT NULL
+pays varchar(50) NOT NULL
+adresse varchar(100) NOT NULL
+ville varchar(50) NOT NULL
+codepostal varchar(10) NOT NULL
+date DATE NOT NULL
+telephone varchar(16) NOT NULL
+
+commande_produit:
+id_commande INT NOT NULL PRIMARY KEY
+id_produit INT NOT NULL PRIMARY KEY
+quantite INT NOT NULL
+
+promotion:
+id INT NOT NULL PRIMARY KEY
+date_fin DATE NOT NULL
+rabais INT NOT NULL
+id_produit INT NOT NULL
