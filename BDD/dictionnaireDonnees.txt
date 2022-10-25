@@ -18,7 +18,7 @@ pays varchar(50) NULL
 adresse varchar(100) NULL
 ville varchar(50) NULL
 codepostal varchar(10) NULL
-telephone varchar(16) NOT NULL
+telephone varchar(16) NULL
 mail varchar(100) NOT NULL
 mdp varchar(255) NOT NULL
 
