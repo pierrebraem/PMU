@@ -6,22 +6,22 @@ if(isset($_GET['url'])){
 
 switch($url[0]){
     case '':
-        require 'pages/accueil.php';
+        require 'Views/accueil.php';
         break;
     case 'parcourir':
-        require 'pages/parcourir.php';
+        require 'Views/parcourir.php';
         break;
     case 'conseil':
-        require 'pages/conseil.php';
+        require 'Views/conseil.php';
         break;
     case 'panier':
-        require 'pages/panier.php';
+        require 'Views/panier.php';
         break;
     case 'connexion':
-        require 'pages/connexion.php';
+        require 'Views/connexion.php';
         break;
     default:
-        require 'pages/404.php';
+        require 'Views/404.php';
         break;
 }
 ?>
