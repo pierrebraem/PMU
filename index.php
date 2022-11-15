@@ -26,6 +26,9 @@ switch($url[0]){
     case 'compte':
         require 'Views/compte.php';
         break;
+    case 'css':
+        require 'src/CSS/css.css';
+        break;
     default:
         require 'Views/404.php';
         break;
