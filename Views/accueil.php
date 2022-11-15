@@ -1,7 +1,18 @@
 <?php require 'src/header.php' ?>
 
-<!-- catégorie -->
+<!-- barre de recherche -->
 <div class="card w-25 ms-3">
+  <h5 class="card-header">Recherche</h5>
+  <div class="card-body">
+    <form class="form-inline">
+      <input class="from-control" type="search" placeholder="Rechercher" aria-label="Recherche">
+      <button class="btn btn-outline-success" type="submit">Ok</button>
+    </form>
+  </div>
+</div>
+
+<!-- Catégorie -->
+<div class="card w-25 ms-3 mt-3">
   <h5 class="card-header">Catégorie</h5>
   <div class="card-body">
     <ul class="list-group">
