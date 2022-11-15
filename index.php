@@ -20,6 +20,12 @@ switch($url[0]){
     case 'connexion':
         require 'Views/connexion.php';
         break;
+    case 'inscription':
+        require 'Views/inscription.php';
+        break;
+    case 'compte':
+        require 'Views/compte.php';
+        break;
     default:
         require 'Views/404.php';
         break;
