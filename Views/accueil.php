@@ -1,6 +1,6 @@
 <?php require 'src/header.php' ?>
 
-<div class="card" style="width: 18%; margin-left: 1%;">
+<div class="card w-25 ms-3">
   <h5 class="card-header">Catégorie</h5>
   <div class="card-body">
     <ul class="list-group">
