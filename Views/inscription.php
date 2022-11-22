@@ -22,7 +22,7 @@
                         <input type="password" class="form-control" id="mdpInscription" placeholder="Mot de passe">
                     </div>
                     <div class="col">
-                        <input type="password" class="form-control" id="cmdpInscription" placeholder="Mot de passe">
+                        <input type="password" class="form-control" id="cmdpInscription" placeholder="Confirmer mot de passe">
                     </div>
                 </div>
                 <div class="row pt-3">
