@@ -1,4 +1,5 @@
 <?php
+    session_start();
     require_once('./classes/route.php');
     require_once('./controllers/accueil.php');
     require_once('./controllers/compte.php');
@@ -13,36 +14,9 @@
         Accueil::index('accueil');
     });
 
-    /* Routes pour la page compte */
-    Route::set('compte', function(){
-        Compte::index('compte');
-    });
-
-    /* Routes pour la page connexion */
-    Route::set('connexion', function(){
-        Connexion::index('connexion');
-    });
-
-    Route::set('connexion/connexion', function(){
-        Connexion::connexion();
-    });
-
-    Route::set('connexion/deconnection', function(){
-        Connexion::deconnexion();
-    });
-
     /* Routes pour la page conseil */
     Route::set('conseil', function(){
         Connexion::index('conseil');
-    });
-
-    /* Routes pour la page inscription */
-    Route::set('inscription', function(){
-        Inscription::index('inscription');
-    });
-
-    Route::set('inscription/inscrit', function(){
-        Inscription::inscription();
     });
 
     /* Routes pour la page panier */
@@ -54,4 +28,37 @@
     Route::set('parcourir', function(){
         Connexion::index('parcourir');
     });
+
+    /* Routes réservées à ceux qui sont connectés */
+    if(!empty($_SESSION)){
+        /* Routes pour la page compte */
+        Route::set('compte', function(){
+            Compte::index('compte');
+        });
+
+        /* Route pour la déconnexion */
+        Route::set('connexion/deconnection', function(){
+            Connexion::deconnexion();
+        });
+    }
+    /* Routes réservées à ceux qui ne sont pas connectés */
+    else{
+        /* Routes pour la page connexion */
+        Route::set('connexion', function(){
+            Connexion::index('connexion');
+        });
+
+        Route::set('connexion/connexion', function(){
+            Connexion::connexion();
+        });
+
+        /* Routes pour la page inscription */
+        Route::set('inscription', function(){
+            Inscription::index('inscription');
+        });
+
+        Route::set('inscription/inscrit', function(){
+            Inscription::inscription();
+        });
+    }
 ?>

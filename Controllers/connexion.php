@@ -17,7 +17,6 @@ class Connexion extends Controller{
         }
         else{
             echo '<p>Connexion réussi</p>';
-            session_start();
             $_SESSION['id'] = $informationConnexion[0]['id'];
             $_SESSION['mail'] = $informationConnexion[0]['mail'];
             //unset($_SESSION['id'], $_SESSION['mail']);
@@ -26,7 +25,6 @@ class Connexion extends Controller{
     }
 
     public static function deconnexion(){
-        session_start();
         unset($_SESSION['id'], $_SESSION['mail']);
         echo '<p>Déconnexion réussi</p>';
         echo '<a href="..">Retour</a>';
