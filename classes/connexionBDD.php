@@ -1,4 +1,5 @@
 <?php
+class BDD{
     function connexion(){
         try{
             return new PDO('mysql:host=localhost;dbname=pmu;charset=utf8', 'admin', 'admin');
@@ -7,4 +8,6 @@
             die('Erreur: '.$e->getMessage());
         }
     }
+}
+
 ?>
