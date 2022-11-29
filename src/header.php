@@ -22,15 +22,21 @@
                         <li class="nav-item">
                             <a class="nav-link" href="panier">Panier</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="inscription">Inscription</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="connexion">Connexion</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="compte">Mon compte</a>
-                        </li>
+                        <?php if(empty($_SESSION)): ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="inscription">Inscription</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="connexion">Connexion</a>
+                            </li>
+                        <?php else: ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="compte">Mon compte</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="connexion/deconnection">Deconnection</a>
+                            </li>
+                        <?php endif; ?>
                     </ul>
                 </div>
             </div>
