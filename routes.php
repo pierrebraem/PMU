@@ -23,6 +23,10 @@
         Connexion::index('connexion');
     });
 
+    Route::set('connexion/connexion', function(){
+        Connexion::connexion();
+    });
+
     /* Routes pour la page conseil */
     Route::set('conseil', function(){
         Connexion::index('conseil');
