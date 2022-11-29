@@ -33,7 +33,7 @@
         Inscription::index('inscription');
     });
 
-    Route::set('inscription/test', function(){
+    Route::set('inscription/inscrit', function(){
         Inscription::inscription();
     });
 

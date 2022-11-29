@@ -1,7 +1,6 @@
 <?php
-require_once './classes/connexionBDD.php';
 
-class Controller extends BDD{
+class Controller{
     public static function index($vue){
         require_once 'views/'.$vue.'.php';
     }
