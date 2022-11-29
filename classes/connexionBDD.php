@@ -10,10 +10,15 @@ class BDD{
     }
 
     public static function requete($requete, $params = array()){
-        $connexion = self::connexion()->prepare($requete);
-        $connexion->execute($params);
-        if(explode(' ', $requete)[0] == 'SELECT'){
-            return $connexion->fetchAll();
+        try{
+            $connexion = self::connexion()->prepare($requete);
+            $connexion->execute($params);
+            if(explode(' ', $requete)[0] == 'SELECT'){
+                return $connexion->fetchAll();
+            }
+        }
+        catch(Exception $e){
+            die('Une erreur s\'est produite');
         }
     }
 }

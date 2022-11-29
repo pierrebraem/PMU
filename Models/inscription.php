@@ -40,5 +40,10 @@
                 'mdp' => password_hash($this->mdp, PASSWORD_ARGON2I)
             ));
         }
+
+        /* Récupère les adresses mails */
+        public function checkmail(){
+            return self::requete('SELECT mail FROM compte');
+        }
     }
 ?>
