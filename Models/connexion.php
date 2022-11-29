@@ -14,7 +14,7 @@
 
         /* Récupère l'adresse mail et le mdp */
         public function checkconnexion($email){
-            return self::requete('SELECT mail, mdp FROM compte WHERE mail = :mail', array('mail' => $email));
+            return self::requete('SELECT id, mail, mdp FROM compte WHERE mail = :mail', array('mail' => $email));
         }
     }
 ?>

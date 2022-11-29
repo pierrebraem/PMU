@@ -17,7 +17,12 @@ class Connexion extends Controller{
         }
         else{
             echo '<p>Connexion réussi</p>';
+            session_start();
+            $_SESSION['id'] = $informationConnexion[0]['id'];
+            $_SESSION['mail'] = $informationConnexion[0]['mail'];
+            //unset($_SESSION['id'], $_SESSION['mail']);
         }
+        echo '<a href="../connexion">Retour</a>';
 
 
     }
