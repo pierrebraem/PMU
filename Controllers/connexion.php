@@ -22,7 +22,7 @@ class Connexion extends Controller{
             $_SESSION['mail'] = $informationConnexion[0]['mail'];
             //unset($_SESSION['id'], $_SESSION['mail']);
         }
-        echo '<a href="../connexion">Retour</a>';
+        echo '<a href="..">Retour</a>';
     }
 
     public static function deconnexion(){
