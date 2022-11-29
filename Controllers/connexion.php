@@ -23,8 +23,13 @@ class Connexion extends Controller{
             //unset($_SESSION['id'], $_SESSION['mail']);
         }
         echo '<a href="../connexion">Retour</a>';
+    }
 
-
+    public static function deconnexion(){
+        session_start();
+        unset($_SESSION['id'], $_SESSION['mail']);
+        echo '<p>Déconnexion réussi</p>';
+        echo '<a href="..">Retour</a>';
     }
 }
 ?>
