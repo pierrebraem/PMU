@@ -1,5 +1,6 @@
 <?php require 'src/header.php' ?>
 
+<div id="etatConnexion"></div>
 <div class="col d-flex justify-content-center">
     <div class="card w-50">
         <div class="card-body">
@@ -19,5 +20,13 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    const divInscription = document.getElementById('etatConnexion');
+    let param = window.location.href.split('?')[1];
+    if(param != undefined){
+        divInscription.innerHTML = '<div class="alert alert-danger" role="danger">L\'adresse mail et/ou le mot de passe est(sont) incorrect(s)</div>';
+    }
+</script>
 
 <?php require 'src/footer.php' ?>
