@@ -13,21 +13,21 @@ class Connexion extends Controller{
         $informationConnexion = $connexion->checkconnexion($email);
 
         if(empty($informationConnexion) || !password_verify($mdp, $informationConnexion[0]['mdp'])){
-            echo '<p>Adresse mail ou mot de passe incorrectes</p>';
+            header('Location: ../connexion?etat=E');
+            die();
         }
         else{
-            echo '<p>Connexion réussi</p>';
             $_SESSION['id'] = $informationConnexion[0]['id'];
             $_SESSION['mail'] = $informationConnexion[0]['mail'];
-            //unset($_SESSION['id'], $_SESSION['mail']);
+            header('Location: ../');
+            die();
         }
-        echo '<a href="..">Retour</a>';
     }
 
     public static function deconnexion(){
         unset($_SESSION['id'], $_SESSION['mail']);
-        echo '<p>Déconnexion réussi</p>';
-        echo '<a href="..">Retour</a>';
+        header('Location: ../');
+        die();
     }
 }
 ?>

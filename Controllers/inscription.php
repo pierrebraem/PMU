@@ -21,23 +21,27 @@ class Inscription extends Controller{
 
         /* Gestion d'erreurs */
         if($mdp != $mdpc){
-            echo '<p>Erreur: le champ mot de passe et confirmer mot de passe ne sont pas les mêmes</p>';
+            header('Location: ../inscription?etat=Emdp');
+            die();
             $erreur = true;
         }
 
         if($nom == "" || $prenom == "" || $email == "" || $mdp == ""){
-            echo '<p>Un des champs suivants est vide : nom, prénom, adresse mail, mot de passe</p>';
+            header('Location: ../inscription?etat=Enull');
+            die();
             $erreur = true;
         }
 
         if($pays == "none"){
-            echo '<p>Aucun pays n\'a était sélectionné</p>';
+            header('Location: ../inscription?etat=Epays');
+            die();
             $erreur = true;
         }
 
         foreach($inscription->checkmail() as $mail){
             if($email == $mail[0]){
-                echo '<p>Un compte avec cette adresse mail : '.$email.' existe déjà.</p>';
+                header('Location: ../inscription?etat=Eemail');
+                die();
                 $erreur = true;
                 break;
             }
@@ -47,10 +51,9 @@ class Inscription extends Controller{
         /* Si pas d'erreur, ajouter l'utilisateur */
         if($erreur == false){
             $inscription->insertion();
-            echo '<p>Votre compte a était créé avec succès</p>';
-
+            header('Location: ../inscription?etat=R');
+            die();
         }
-        echo '<a href="../inscription">Retour</a>';
     }
 }
 ?>
