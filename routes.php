@@ -16,17 +16,17 @@
 
     /* Routes pour la page conseil */
     Route::set('conseil', function(){
-        Connexion::index('conseil');
+        Conseil::index('conseil');
     });
 
     /* Routes pour la page panier */
     Route::set('panier', function(){
-        Connexion::index('panier');
+        Panier::index('panier');
     });
 
     /* Routes pour la page parcourir */
     Route::set('parcourir', function(){
-        Connexion::index('parcourir');
+        Parcourir::index('parcourir');
     });
 
     /* Routes réservées à ceux qui sont connectés */
