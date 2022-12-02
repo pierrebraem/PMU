@@ -19,7 +19,7 @@
             <p>Nom produit 1</p>
             <p>Description produit 1</p>
             <p>9.99€</p>
-            <button class="btn btn-success"><i class="fa-solid fa-cart-shopping"></i></button>
+            <button class="btn btn-success">Ajouter au panier</button>
         </div>
     </div>
 </div>
@@ -31,7 +31,7 @@
             <p>Nom produit 2</p>
             <p>Description produit 2</p>
             <p>14.99€</p>
-            <button class="btn btn-success"><i class="fa-solid fa-cart-shopping"></i></button>
+            <button class="btn btn-success">Ajouter au panier</button>
         </div>
     </div>
 </div>
