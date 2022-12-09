@@ -1,4 +1,9 @@
-<?php require 'src/header.php' ?>
+<?php 
+    require_once 'src/header.php';
+    require_once './models/conseil.php';
+    $conseil = new Conseil();
+    $tousConseils = $conseil->allConseils();
+?>
 
 <div class="col d-flex justify-content-center">
     <div class="card w-75 text-center">
@@ -12,24 +17,17 @@
     </div>
 </div>
 
-<div class="col d-flex justify-content-center mt-5">
-    <div class="card w-75 text-center">
-        <h5 class="card-header">Conseil 1</h5>
-        <div class="card-body">
-            <p>Conseil 1</p>
-            <p>Description conseil 1</p>
+<?php foreach($tousConseils as $unConseil): ?>
+    <div class="col d-flex justify-content-center mt-5">
+        <div class="card w-75 text-center">
+            <h5 class="card-header"><?php echo($unConseil['nom']); ?></h5>
+            <div class="card-body">
+                <p><?php echo($unConseil['nom']); ?></p>
+                <p><?php echo($unConseil['description']); ?></p>
+                <a class="btn btn-primary" href="conseil?id=<?php echo($unConseil['id']) ?>">Détail</a>
+            </div>
         </div>
     </div>
-</div>
-
-<div class="col d-flex justify-content-center mt-5">
-    <div class="card w-75 text-center">
-        <h5 class="card-header">Conseil 2</h5>
-        <div class="card-body">
-            <p>Conseil 2</p>
-            <p>Description conseil 2</p>
-        </div>
-    </div>
-</div>
+<?php endforeach; ?>
 
 <?php require 'src/footer.php' ?>
