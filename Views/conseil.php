@@ -2,15 +2,20 @@
     require_once 'src/header.php';
     require_once './models/conseil.php';
     $conseil = new Conseil();
-    $tousConseils = $conseil->allConseils();
+    if(isset($_GET['search'])){
+        $tousConseils = $conseil->recherche($_GET['search']);
+    }
+    else{
+        $tousConseils = $conseil->allConseils();
+    }
 ?>
 
 <div class="col d-flex justify-content-center">
     <div class="card w-75 text-center">
         <h5 class="card-header">Recherche</h5>
         <div class="card-body">
-            <form class="form-inline">
-                <input class="from-control" type="search" placeholder="Rechercher" aria-label="Recherche">
+            <form action="conseil/search" method="post" class="form-inline">
+                <input class="from-control" type="search" name="nom" placeholder="Rechercher" aria-label="Recherche">
                 <button class="btn btn-outline-success" type="submit">Ok</button>
             </form>
         </div>

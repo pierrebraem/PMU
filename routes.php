@@ -19,6 +19,10 @@
         ConseilController::index('conseil');
     });
 
+    Route::set('conseil/search', function(){
+        ConseilController::recherche();
+    });
+
     /* Routes pour la page panier */
     Route::set('panier', function(){
         PanierController::index('panier');
