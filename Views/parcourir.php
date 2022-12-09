@@ -2,15 +2,20 @@
     require_once 'src/header.php';
     require_once './models/produit.php';
     $produit = new Produit();
-    $tousProduits = $produit->allProduits();
+    if(isset($_GET['search'])){
+        $tousProduits = $produit->recherche($_GET['search']);
+    }
+    else{
+        $tousProduits = $produit->allProduits();
+    }
 ?>
 
 <div class="col d-flex justify-content-center">
     <div class="card w-75 text-center">
         <h5 class="card-header">Recherche</h5>
         <div class="card-body">
-            <form class="form-inline">
-                <input class="from-control" type="search" placeholder="Rechercher" aria-label="Recherche">
+            <form action="parcourir/search" method="post" class="form-inline">
+                <input class="from-control" type="search" name="nom" placeholder="Rechercher" aria-label="Recherche">
                 <button class="btn btn-outline-success" type="submit">Ok</button>
             </form>
         </div>

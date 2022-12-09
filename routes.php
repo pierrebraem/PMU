@@ -29,6 +29,10 @@
         Parcourir::index('parcourir');
     });
 
+    Route::set('parcourir/search', function(){
+        Parcourir::recherche();
+    });
+
     /* Routes réservées à ceux qui sont connectés */
     if(!empty($_SESSION)){
         /* Routes pour la page compte */
