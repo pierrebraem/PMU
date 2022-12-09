@@ -1,4 +1,9 @@
-<?php require 'src/header.php' ?>
+<?php 
+    require_once 'src/header.php';
+    require_once './models/produit.php';
+    $produit = new Produit();
+    $tousProduits = $produit->allProduits();
+?>
 
 <div class="col d-flex justify-content-center">
     <div class="card w-75 text-center">
@@ -12,30 +17,19 @@
     </div>
 </div>
 
-<div class="col d-flex justify-content-center mt-5">
-    <div class="card w-75 text-center">
-        <h5 class="card-header">Nom produit 1</h5>
-        <div class="card-body">
-            <p>Nom produit 1</p>
-            <p>Description produit 1</p>
-            <p>9.99€</p>
-            <a class="btn btn-primary" href="produit?id=1">Détail</a>
-            <button class="btn btn-success">Ajouter au panier</button>
+<?php foreach($tousProduits as $unProduit): ?>
+    <div class="col d-flex justify-content-center mt-5">
+        <div class="card w-75 text-center">
+            <h5 class="card-header"><?php echo($unProduit['nom']) ?></h5>
+            <div class="card-body">
+                <p><?php echo($unProduit['nom']) ?></p>
+                <p><?php echo($unProduit['description']) ?></p>
+                <p><?php echo($unProduit['prix']) ?>€</p>
+                <a class="btn btn-primary" href="produit?id=<?php echo($unProduit['id']) ?>">Détail</a>
+                <button class="btn btn-success">Ajouter au panier</button>
+            </div>
         </div>
     </div>
-</div>
-
-<div class="col d-flex justify-content-center mt-5">
-    <div class="card w-75 text-center">
-        <h5 class="card-header">Nom produit 2</h5>
-        <div class="card-body">
-            <p>Nom produit 2</p>
-            <p>Description produit 2</p>
-            <p>14.99€</p>
-            <a class="btn btn-primary" href="produit?id=2">Détail</a>
-            <button class="btn btn-success">Ajouter au panier</button>
-        </div>
-    </div>
-</div>
+<?php endforeach ?>
 
 <?php require 'src/footer.php' ?>
