@@ -24,7 +24,7 @@
     });
 
     Route::set('conseil/detail', function(){
-        ConseilCOntroller::detail();
+        ConseilController::detail();
     });
 
     /* Routes pour la page panier */
@@ -39,6 +39,10 @@
 
     Route::set('parcourir/search', function(){
         ParcourirController::recherche();
+    });
+
+    Route::set('parcourir/detail', function(){
+        ParcourirController::detail();
     });
 
     /* Routes réservées à ceux qui sont connectés */
