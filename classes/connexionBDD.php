@@ -18,7 +18,7 @@ class BDD{
             }
         }
         catch(Exception $e){
-            die('Une erreur s\'est produite');
+            die($e);
         }
     }
 }
