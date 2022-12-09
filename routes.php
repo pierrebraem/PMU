@@ -23,6 +23,10 @@
         ConseilController::recherche();
     });
 
+    Route::set('conseil/detail', function(){
+        ConseilCOntroller::detail();
+    });
+
     /* Routes pour la page panier */
     Route::set('panier', function(){
         PanierController::index('panier');
