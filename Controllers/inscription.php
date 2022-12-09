@@ -2,7 +2,7 @@
 require_once './controllers/controller.php';
 require_once './models/inscription.php';
 
-class Inscription extends Controller{
+class InscriptionController extends Controller{
     public static function inscription(){
         /* Récupère les données du POST et les mets dans des variables. */
         $nom = $_POST['nom'];

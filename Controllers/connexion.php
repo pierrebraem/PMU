@@ -2,7 +2,7 @@
 require_once './controllers/controller.php';
 require_once './models/connexion.php';
 
-class Connexion extends Controller{
+class ConnexionController extends Controller{
     public static function connexion(){
         $email = $_POST['email'];
         $mdp = $_POST['mdp'];

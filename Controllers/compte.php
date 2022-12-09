@@ -1,7 +1,7 @@
 <?php
 require_once './controllers/controller.php';
 
-class Compte extends Controller{
+class CompteController extends Controller{
 
 }
 ?>
