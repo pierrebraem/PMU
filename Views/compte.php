@@ -1,18 +1,23 @@
-<?php require 'src/header.php' ?>
+<?php 
+    require_once 'src/header.php';
+    require_once './models/compte.php';
+    $compte = new Compte();
+    $unCompte = $compte->getCompte($_SESSION['id']);
+?>
 
 <!-- Informations compte -->
 <div class="col d-flex justify-content-center">
     <div class="card w-75 text-center">
         <h5 class="card-header">Profil</h5>
         <div class="card-body">
-            <p>Nom : Braem</p>
-            <p>Prénom : Pierre</p>
-            <p>mail : pierrebraem@orange.fr</p>
-            <p>Pays : France</p>
-            <p>Adresse : 9, Campus du Mont Houy</p>
-            <p>Ville : Valenciennes</p>
-            <p>Code postal : 59313</p>
-            <p>Téléphone : 0303030303</p>
+            <p>Nom : <?php echo($unCompte[0]['nom']); ?></p>
+            <p>Prénom : <?php echo($unCompte[0]['prenom']); ?></p>
+            <p>mail : <?php echo($unCompte[0]['mail']); ?></p>
+            <p>Pays : <?php echo($unCompte[0]['pays']); ?></p>
+            <p>Adresse : <?php echo($unCompte[0]['adresse']); ?></p>
+            <p>Ville : <?php echo($unCompte[0]['ville']); ?></p>
+            <p>Code postal : <?php echo($unCompte[0]['codepostal']); ?></p>
+            <p>Téléphone : <?php echo($unCompte[0]['telephone']); ?></p>
             <a class="btn btn-primary" href="#">Changer les informations</a>
         </div>
     </div>
