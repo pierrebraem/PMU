@@ -53,7 +53,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
-                                <p>Prix : 24,98€</p>
+                                <p>Prix : <?php echo($panier->prixTotal($_SESSION['id'])); ?>€</p>
                             </div>
                             <div class="col">
                                 <a href="#" class="btn btn-success">Payer</a>
