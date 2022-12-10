@@ -46,5 +46,27 @@ class CompteController extends Controller{
             die();
         }
     }
+
+    public static function modifierMDP(){
+        $AMDP = $_POST['AMDP'];
+        $MDP = $_POST['MDP'];
+        $MDPC = $_POST['MDPC'];
+
+        $compte = new Compte();
+
+        if(!password_verify($AMDP, $compte->checkMDP($_SESSION['id'])[0]['mdp'])){
+            header('Location: ../compte?action=changerMDP&etat=MA');
+            die();
+        }
+        elseif($MDP != $MDPC){
+            header('Location: ../compte?action=changerMDP&etat=MDPC');
+            die();
+        }
+        else{
+            $compte->changerMDP($_SESSION['id'], password_hash($MDP, PASSWORD_ARGON2I));
+            header('Location: ../compte?action=MDPmodifie');
+            die();
+        }
+    }
 }
 ?>

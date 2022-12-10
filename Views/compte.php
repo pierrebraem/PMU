@@ -7,6 +7,7 @@
 
 <div id="etatModifierInfos"></div>
 <?php if(isset($_GET['action']) && $_GET['action'] == 'changerInfos'): ?>
+    <!-- Modification d'information -->
     <div class="col d-flex justify-content-center">
         <div class="card w-75 text-center">
             <h5 class="card-header">Changer d'informations</h5>
@@ -51,6 +52,7 @@
         </div>
     </div>
 <?php else: ?>
+
 <!-- Informations compte -->
 <div class="col d-flex justify-content-center">
     <div class="card w-75 text-center">
@@ -74,7 +76,7 @@
     <div class="card w-75 text-center">
         <h5 class="card-header">Changer de mot de passe</h5>
         <div class="card-body">
-            <form class="form-inline">
+            <form action="compte/modifierMDP" method="post">
                 <div class="col pb-3">
                     <input class="form-control" type="password" name="AMDP" placeholder="Ancien mot de passe">
                 </div>
@@ -120,7 +122,7 @@
     let param = window.location.href.split('?')[1];
     let param2 = window.location.href.split('&')[1];
     if(param2 != undefined || param != undefined){
-        if(param.split('=')[1] != 'modifie'){
+        if(param.split('=')[1] != 'modifie' && param.split('=')[1] != 'MDPmodifie'){
             let value = param2.split('=')[1];
             switch(value){
                 case 'Enull':
@@ -135,10 +137,19 @@
                 case 'Email':
                     divModifierInfos.innerHTML = '<div class="alert alert-danger" role="alert">L\'adresse email saisi existe déjà</div>';
                     break;
+                case 'MA':
+                    divModifierInfos.innerHTML = '<div class="alert alert-danger" role="alert">Mot de passe actuel incorrect</div>';
+                    break;
+                case 'MDPC':
+                    divModifierInfos.innerHTML = '<div class="alert alert-danger" role="alert">le champ mot de passe et confirmer mot de passe ne sont pas les mêmes</div>';
+                    break;
             }
         }
-        else{
+        else if(param.split('=')[1] == 'modifie'){
             divModifierInfos.innerHTML = '<div class="alert alert-success" role="alert">Informations du compte modifiées</div>';
+        }
+        else{
+            divModifierInfos.innerHTML = '<div class="alert alert-success" role="alert">Mot de passe modifié</div>';
         }
     }
 </script>

@@ -56,6 +56,10 @@
             CompteController::modifier();
         });
 
+        Route::set('compte/modifierMDP', function(){
+            CompteController::modifierMDP();
+        });
+
         /* Route pour la déconnexion */
         Route::set('connexion/deconnection', function(){
             ConnexionController::deconnexion();

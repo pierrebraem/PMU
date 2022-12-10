@@ -25,5 +25,13 @@
                 'pays' => $pays
             ));
         }
+
+        public function checkMDP($id){
+            return self::requete('SELECT mdp FROM compte WHERE id = :id', array('id' => $id));
+        }
+
+        public function changerMDP($id, $MDP){
+            self::requete('UPDATE compte SET mdp = :mdp WHERE id = :id', array('id' => $id, 'mdp' => $MDP));
+        }
     }
 ?>
