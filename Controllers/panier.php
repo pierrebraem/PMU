@@ -29,5 +29,21 @@ class PanierController extends Controller{
             header('Location: ../parcourir');
         }
     }
+
+    public static function supprimer(){
+        if(empty($_SESSION)){
+            header('Location: ../connexion');
+        }
+        else{
+            $idPanier = $_POST['idPanier'];
+            $idProduit = $_POST['idProduit'];
+
+            $panier = new panier();
+
+            $panier->supprimerArticle($idPanier, $idProduit);
+
+            header('Location: ../panier');
+        }
+    }
 }
 ?>

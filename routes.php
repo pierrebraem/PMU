@@ -36,6 +36,10 @@
         PanierController::ajouter();
     });
 
+    Route::set('panier/supprimer', function(){
+        PanierController::supprimer();
+    });
+
     /* Routes pour la page parcourir */
     Route::set('parcourir', function(){
         ParcourirController::index('parcourir');

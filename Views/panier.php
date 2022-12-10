@@ -38,7 +38,11 @@
                                     <p><?php echo($unArticle['prix']); ?>€</p>
                                 </div>
                                 <div class="col">
-                                    <a href="#" class="btn btn-danger">Supprimer</a>
+                                    <form action="panier/supprimer" method="post">
+                                        <input type="hidden" name="idPanier" value="<?php echo($unArticle['idP']); ?>">
+                                        <input type="hidden" name="idProduit" value="<?php echo($unArticle['id']); ?>">
+                                        <button class="btn btn-danger" type="submit">Supprimer</a>
+                                    </form>
                                 </div>
                             </div>
                         <?php endforeach; ?>
