@@ -52,6 +52,10 @@
             CompteController::index('compte');
         });
 
+        Route::set('compte/modifier', function(){
+            CompteController::modifier();
+        });
+
         /* Route pour la déconnexion */
         Route::set('connexion/deconnection', function(){
             ConnexionController::deconnexion();
