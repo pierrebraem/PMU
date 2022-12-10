@@ -1,5 +1,12 @@
-<?php require 'src/header.php' ?>
+<?php 
+    require_once 'src/header.php';
+?>
 
+<?php
+    if(empty($_SESSION)):
+        header('Location: ./connexion');
+    else:
+?>
 <section class="h-100">
     <div class="container py-3">
         <div class="row d-flex justify-content-center">
@@ -68,5 +75,6 @@
         </div>
     </div>
 </section>
+<?php endif; ?>
 
 <?php require 'src/footer.php' ?>

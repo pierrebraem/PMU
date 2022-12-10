@@ -24,9 +24,9 @@
             <p><?php echo($unProduit[0]['nomc']) ?></p>
             <div class="pt-2">
                 <form action="panier/ajouter" method="post">
-                    <input type="hidden" name="id" value="<?php $_GET['id'] ?>">
+                    <input type="hidden" name="id" value="<?php echo($_GET['id']); ?>">
                     <div class="col d-flex justify-content-center pb-2">
-                        <input type="number" class="form-control w-25" value="1">
+                        <input type="number" class="form-control w-25" name="quantite" value="1">
                     </div>
                     <button class="btn btn-success" type="submit">Ajouter au panier</button>
                 </form>
@@ -65,7 +65,7 @@
                         <form action="panier/ajouter" method="post">
                             <input type="hidden" name="id" value="<?php echo($unProduit['id']) ?>">
                             <div class="col d-flex justify-content-center pb-2">
-                                <input type="number" class="form-control w-25" value="1">
+                                <input type="number" class="form-control w-25" name="quantite" value="1">
                             </div>
                             <button class="btn btn-success" type="submit">Ajouter au panier</button>
                         </form>

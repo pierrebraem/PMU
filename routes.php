@@ -32,6 +32,10 @@
         PanierController::index('panier');
     });
 
+    Route::set('panier/ajouter', function(){
+        PanierController::ajouter();
+    });
+
     /* Routes pour la page parcourir */
     Route::set('parcourir', function(){
         ParcourirController::index('parcourir');
