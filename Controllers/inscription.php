@@ -22,27 +22,27 @@ class InscriptionController extends Controller{
         /* Gestion d'erreurs */
         if($mdp != $mdpc){
             header('Location: ../inscription?etat=Emdp');
-            die();
             $erreur = true;
+            die();
         }
 
         if($nom == "" || $prenom == "" || $email == "" || $mdp == ""){
             header('Location: ../inscription?etat=Enull');
-            die();
             $erreur = true;
+            die();
         }
 
         if($pays == "none"){
             header('Location: ../inscription?etat=Epays');
-            die();
             $erreur = true;
+            die();
         }
 
         foreach($inscription->checkmail() as $mail){
             if($email == $mail[0]){
                 header('Location: ../inscription?etat=Eemail');
-                die();
                 $erreur = true;
+                die();
                 break;
             }
         }
