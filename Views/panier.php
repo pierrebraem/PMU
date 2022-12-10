@@ -1,11 +1,14 @@
 <?php 
     require_once 'src/header.php';
+    require_once './models/panier.php';
+    $panier = new Panier();
 ?>
 
 <?php
     if(empty($_SESSION)):
         header('Location: ./connexion');
     else:
+        $tousArticles = $panier->allArticles($_SESSION['id']);
 ?>
 <section class="h-100">
     <div class="container py-3">
@@ -15,44 +18,31 @@
                     <h5>Panier</h5>
                 </div>
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col">
-                            <img src="#">
-                        </div>
-                        <div class="col">
-                           <p>Nom : montBC6</p>
-                           <p>Description : montBC6</p>
-                           <p>Catégorie : Test</p>
-                        </div>
-                        <div class="col">
-                            <p>Quantité : 3</p>
-                        </div>
-                        <div class="col">
-                            <p>14,99€</p>
-                        </div>
-                        <div class="col">
-                            <a href="#" class="btn btn-danger">Supprimer</a>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <img src="#">
-                        </div>
-                        <div class="col">
-                           <p>Nom : montBC13</p>
-                           <p>Description : montBC13</p>
-                           <p>Catégorie : Test</p>
-                        </div>
-                        <div class="col">
-                            <p>Quantité : 2</p>
-                        </div>
-                        <div class="col">
-                            <p>9,99€</p>
-                        </div>
-                        <div class="col">
-                            <a href="#" class="btn btn-danger">Supprimer</a>
-                        </div>
-                    </div>
+                    <?php if(empty($tousArticles)): ?>
+                        <p>Aucun article n'est présent dans le panier</p>
+                    <?php else: ?>
+                        <?php foreach($tousArticles as $unArticle): ?>
+                            <div class="row">
+                                <div class="col">
+                                    <img src="<?php echo($unArticle['image']); ?>">
+                                </div>
+                                <div class="col">
+                                <p>Nom : <?php echo($unArticle['nom']); ?></p>
+                                <p>Description : <?php echo($unArticle['description']); ?></p>
+                                <p>Catégorie : <?php echo($unArticle['nomC']); ?></p>
+                                </div>
+                                <div class="col">
+                                    <p>Quantité : <?php echo($unArticle['quantite']); ?></p>
+                                </div>
+                                <div class="col">
+                                    <p><?php echo($unArticle['prix']); ?>€</p>
+                                </div>
+                                <div class="col">
+                                    <a href="#" class="btn btn-danger">Supprimer</a>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
                 </div>
             </div>
             <div class="pt-3">
