@@ -8,6 +8,7 @@
     require_once('./controllers/inscription.php');
     require_once('./controllers/panier.php');
     require_once('./controllers/parcourir.php');
+    require_once('./controllers/commande.php');
 
     /* Routes pour la page accueil */
     Route::set('', function(){
@@ -66,6 +67,11 @@
 
         Route::set('compte/modifierMDP', function(){
             CompteController::modifierMDP();
+        });
+
+        /* Routes pour la commande */
+        Route::set('commande', function(){
+            CommandeController::index('commande');
         });
 
         /* Route pour la déconnexion */

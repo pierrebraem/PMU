@@ -60,7 +60,11 @@
                                 <p>Prix : <?php echo($panier->prixTotal($_SESSION['id'])); ?>€</p>
                             </div>
                             <div class="col">
-                                <a href="#" class="btn btn-success">Payer</a>
+                                <?php if($panier->prixTotal($_SESSION['id']) != 0): ?>
+                                    <a href="/commande" class="btn btn-success">Payer</a>
+                                <?php else: ?>
+                                    <a class="btn btn-success disabled">Payer</a>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
