@@ -61,7 +61,7 @@
                             </div>
                             <div class="col">
                                 <?php if($panier->prixTotal($_SESSION['id']) != 0): ?>
-                                    <a href="/commande" class="btn btn-success">Payer</a>
+                                    <a href="./commande" class="btn btn-success">Payer</a>
                                 <?php else: ?>
                                     <a class="btn btn-success disabled">Payer</a>
                                 <?php endif; ?>
