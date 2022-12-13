@@ -74,6 +74,10 @@
             CommandeController::index('commande');
         });
 
+        Route::set('commande/commander', function(){
+            CommandeController::commander();
+        });
+
         /* Route pour la déconnexion */
         Route::set('connexion/deconnection', function(){
             ConnexionController::deconnexion();
