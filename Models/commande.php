@@ -42,10 +42,16 @@
             $idCommande = self::requete('SELECT MAX(id) AS id FROM commande')[0]['id'];
 
             foreach($listePanier as $article){
-                self::requete('INSERT INTO commande_produit (id_commande, id_produit, quantite) VALUES(:idCommande, :idProduit, :quantite)', array(
+                $prix = self::requete('SELECT ROUND((prod.prix * (100-prom.rabais)) / 100, 2) AS \'prixReduit\' FROM produit prod INNER JOIN promotion prom ON prod.id = prom.id_produit WHERE id_produit = :idProduit', array('idProduit' => $article['id_produit']))[0]['prixReduit'];
+                
+                if(empty($prix)){
+                    $prix = self::requete('SELECT prix FROM produit WHERE id = :id', array('id' => $article['id_produit']))[0]['prix'];
+                }
+                self::requete('INSERT INTO commande_produit (id_commande, id_produit, quantite, prix) VALUES(:idCommande, :idProduit, :quantite, :prix)', array(
                     'idCommande' => $idCommande,
                     'idProduit' => $article['id_produit'],
-                    'quantite' => $article['quantite']
+                    'quantite' => $article['quantite'],
+                    'prix' => $prix
                 ));
             }
         }
