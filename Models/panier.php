@@ -53,13 +53,23 @@
             $tousArticles = self::requete('SELECT pr.*, pp.quantite, c.nom as nomC FROM panier p INNER JOIN panier_produit pp ON p.id = pp.id_panier INNER JOIN produit pr ON pp.id_produit = pr.id INNER JOIN categorie c ON pr.id_categorie = c.id WHERE p.id_compte = :idCompte', array('idCompte' => $idCompte));
 
             foreach($tousArticles as $unArticle){
-                $prixTotal = $prixTotal + $unArticle['prix'] * $unArticle['quantite'];
+                $promo = self::requete('SELECT ROUND((prod.prix * (100-prom.rabais)) / 100, 2) AS \'prixReduit\', prom.id_produit, prom.date_fin FROM produit prod INNER JOIN promotion prom ON prod.id = prom.id_produit WHERE prom.id_produit = :idProduit',array('idProduit' => $unArticle['id']));;
+                if(empty($promo)){
+                    $prixTotal = $prixTotal + $unArticle['prix'] * $unArticle['quantite'];
+                }
+                else{
+                    $prixTotal = $prixTotal + $promo[0]['prixReduit'] * $unArticle['quantite'];
+                }
             }
             return $prixTotal;
         }
 
         public function supprimerArticle($idPanier, $idProduit){
             self::requete('DELETE FROM panier_produit WHERE id_panier = :idPanier AND id_produit = :idProduit', array('idPanier' => $idPanier, 'idProduit' => $idProduit));
+        }
+
+        public function checkPromotion($idProduit){
+            return self::requete('SELECT ROUND((prod.prix * (100-prom.rabais)) / 100, 2) AS \'prixReduit\', prom.id_produit, prom.date_fin FROM produit prod INNER JOIN promotion prom ON prod.id = prom.id_produit WHERE prom.id_produit = :idProduit',array('idProduit' => $idProduit));
         }
     }
 ?>

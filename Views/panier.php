@@ -35,7 +35,14 @@
                                     <p>Quantité : <?php echo($unArticle['quantite']); ?></p>
                                 </div>
                                 <div class="col">
-                                    <p><?php echo($unArticle['prix']); ?>€</p>
+                                    <?php $promo = $panier->checkPromotion($unArticle['id']); ?>
+                                    <?php if(empty($promo)): ?>
+                                        <p><?php echo($unArticle['prix']); ?>€</p>
+                                    <?php else: ?>
+                                        <p>Était à : <?php echo($unArticle['prix']); ?>€</p>
+                                        <p>Est à : <?php echo($promo[0]['prixReduit'])?>€</p>
+                                        <p>Fin de la promotion : <?php echo($promo[0]['date_fin']) ?></p>
+                                    <?php endif; ?>
                                 </div>
                                 <div class="col">
                                     <form action="panier/supprimer" method="post">
