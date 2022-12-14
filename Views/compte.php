@@ -3,6 +3,7 @@
     require_once './models/compte.php';
     $compte = new Compte();
     $unCompte = $compte->getCompte($_SESSION['id']);
+    $commandes = $compte->getCommandes($_SESSION['id']);
 ?>
 
 <div id="etatModifierInfos"></div>
@@ -97,21 +98,19 @@
     <div class="card w-75 text-center">
         <h5 class="card-header">Historique des commandes</h5>
         <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-                <p>Commande du 01-01-2022</p>
-                <a class="btn btn-primary" href="#">Détail</a>
-                <a class="btn btn-danger" href="#">Télécharger PDF</a>
-            </li>
-            <li class="list-group-item">
-                <p>Commande du 02-01-2022</p>
-                <a class="btn btn-primary" href="#">Détail</a>
-                <a class="btn btn-danger" href="#">Télécharger PDF</a>
-            </li>
-            <li class="list-group-item">
-                <p>Commande du 03-01-2022</p>
-                <a class="btn btn-primary" href="#">Détail</a>
-                <a class="btn btn-danger" href="#">Télécharger PDF</a>
-            </li>
+            <?php if(empty($commandes)): ?>
+                <li class="list-group-item">
+                    <p>Aucune commande enregistrée</p>
+                </li>
+            <?php else: ?>
+                <?php foreach($commandes as $uneCommande): ?>
+                    <li class="list-group-item">
+                        <p>Commande du <?php echo($uneCommande['date']); ?></p>
+                        <a class="btn btn-primary" href="./compte?DetailCommande=<?php echo($uneCommande['id']); ?>">Détail</a>
+                        <a class="btn btn-danger" href="#">Télécharger PDF</a>
+                    </li>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </ul>
     </div>
 </div>

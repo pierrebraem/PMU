@@ -33,5 +33,9 @@
         public function changerMDP($id, $MDP){
             self::requete('UPDATE compte SET mdp = :mdp WHERE id = :id', array('id' => $id, 'mdp' => $MDP));
         }
+
+        public function getCommandes($idCompte){
+            return self::requete('SELECT * FROM commande WHERE id_compte = :idCompte', array('idCompte' => $idCompte));
+        }
     }
 ?>
