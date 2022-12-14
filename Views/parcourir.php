@@ -2,6 +2,7 @@
     require_once 'src/header.php';
     require_once './models/produit.php';
     $produit = new Produit();
+    $tousPromotions = $produit->getPromotions();
     if(isset($_GET['search'])){
         $tousProduits = $produit->recherche($_GET['search']);
     }
@@ -20,7 +21,18 @@
         <div class="card-body">
             <p><?php echo($unProduit[0]['nomp']) ?></p>
             <p><?php echo($unProduit[0]['description']) ?></p>
-            <p><?php echo($unProduit[0]['prix']) ?></p>
+            <?php $boolPromotion = false; ?>
+                <?php foreach($tousPromotions as $unePromotion): ?>
+                    <?php if($_GET['id'] == $unePromotion['id_produit']): ?>
+                        <p>Était à : <?php echo($unProduit[0]['prix']); ?>€</p>
+                        <p>Est à : <?php echo($unePromotion['prixReduit']); ?>€</p>
+                        <p>Fin de la promotion : <?php echo($unePromotion['date_fin']); ?>
+                    <?php $boolPromotion = true; ?>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+                <?php if($boolPromotion == false): ?>
+                    <p><?php echo($unProduit[0]['prix']) ?>€</p>
+                <?php endif; ?>
             <p><?php echo($unProduit[0]['nomc']) ?></p>
             <div class="pt-2">
                 <form action="panier/ajouter" method="post">
@@ -56,7 +68,18 @@
                 <div class="card-body">
                     <p><?php echo($unProduit['nom']) ?></p>
                     <p><?php echo($unProduit['description']) ?></p>
-                    <p><?php echo($unProduit['prix']) ?>€</p>
+                    <?php $boolPromotion = false; ?>
+                    <?php foreach($tousPromotions as $unePromotion): ?>
+                        <?php if($unProduit['id'] == $unePromotion['id_produit']): ?>
+                            <p>Était à : <?php echo($unProduit['prix']); ?>€</p>
+                            <p>Est à : <?php echo($unePromotion['prixReduit']); ?>€</p>
+                            <p>Fin de la promotion : <?php echo($unePromotion['date_fin']); ?>
+                            <?php $boolPromotion = true; ?>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                    <?php if($boolPromotion == false): ?>
+                        <p><?php echo($unProduit['prix']) ?>€</p>
+                    <?php endif; ?>
                     <form action="parcourir/detail" method="post">
                         <input type="hidden" name="id" value="<?php echo($unProduit['id']) ?>">
                         <button class="btn btn-primary" type="submit">Détail</button>
