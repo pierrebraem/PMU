@@ -36,7 +36,7 @@ class CommandeController extends Controller{
         if($erreur == false){
             $commande->setCommande($commande->getContenusPanier($_SESSION['id']), $_SESSION['id'], $nom, $prenom, $email, $telephone, $pays, $adresse, $ville, $cp);
             $commande->supprimerPanier($_SESSION['id']);
-            header('Location: ../commande?acheter=true');
+            header('Location: ../commande?acheter=true&commande_id='.$commande->getLastCommande()[0]['id']);
             die();
         }
     }

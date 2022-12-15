@@ -4,7 +4,10 @@ require_once 'src/header.php'; ?>
 <?php if(isset($_GET['acheter'])): ?>
     <div class="alert alert-success" role="alert">Votre commande a était effectuée</div>
     <div class="text-center">
-        <button class="btn btn-danger">Télécharger le PDF</button>
+        <form action="commande/telecharger" method="post">
+            <input type="hidden" name="id" value="<?php echo($_GET['commande_id']); ?>">
+            <input type="submit" class="btn btn-danger" value="Télécharger le PDF">
+        </form>
     </div>
 <?php else: ?>
     <div id="etatCommande"></div>
