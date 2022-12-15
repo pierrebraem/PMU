@@ -73,7 +73,8 @@ CREATE TABLE commande(
     adresse VARCHAR(100) NOT NULL,
     ville VARCHAR(50) NOT NULL,
     codepostal VARCHAR(10) NOT NULL,
-    date DATE NOT NULL
+    date DATE NOT NULL,
+    id_compte INT NOT NULL
 );
 
 -- Création de la table "commande_produit"
@@ -81,6 +82,7 @@ CREATE TABLE commande_produit(
     id_commande INT NOT NULL,
     id_produit INT NOT NULL,
     quantite INT NOT NULL,
+    prix DECIMAL(6, 2) NOT NULL,
     PRIMARY KEY(id_commande, id_produit)
 );
 
@@ -96,6 +98,10 @@ CREATE TABLE promotion(
 -- Création de la clé étrangère pour "produit"
 ALTER TABLE produit
 ADD FOREIGN KEY (id_categorie) REFERENCES categorie(id);
+
+-- Création de la clé étrangère pour "commande"
+ALTER TABLE commande
+ADD FOREIGN KEY (id_compte) REFERENCES compte(id);
 
 -- Création des clés étrangères pour "conseil_produit"
 ALTER TABLE conseil_produit
