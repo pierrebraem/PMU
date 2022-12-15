@@ -1,11 +1,20 @@
+<!-- 
+Affiche les informations du compte
+Affiche le formulaire de modification du compte
+Affiche le formulaire pour changer le mot de passe
+Affiche l'historique des commandes du compte
+-->
 <?php 
     require_once 'src/header.php';
     require_once './models/compte.php';
     $compte = new Compte();
+
+    /* Récupère les informations du compte ainsi que son historique des commandes */
     $unCompte = $compte->getCompte($_SESSION['id']);
     $commandes = $compte->getCommandes($_SESSION['id']);
 ?>
 
+<!-- Div pour afficher les erreurs -->
 <div id="etatModifierInfos"></div>
 <?php if(isset($_GET['action']) && $_GET['action'] == 'changerInfos'): ?>
     <!-- Modification d'information -->
@@ -14,15 +23,19 @@
             <h5 class="card-header">Changer d'informations</h5>
             <div class="card-body">
                 <form action="compte/modifier" method="post">
+                    <!-- Demande le nouveau nom -->
                     <div class="col">
                         <input type="text" class="form-control" placeholder="Nom" name="nom" value="<?php echo($unCompte[0]['nom']); ?>">
                     </div>
+                    <!-- Demande le nouveau prénom -->
                     <div class="col pt-3">
                         <input type="text" class="form-control" placeholder="Prenom" name="prenom" value="<?php echo($unCompte[0]['prenom']); ?>">
                     </div>
+                    <!-- Demande le nouveau mail -->
                     <div class="col pt-3">
                         <input type="text" class="form-control" placeholder="Mail" name="email" value="<?php echo($unCompte[0]['mail']); ?>">
                     </div>
+                    <!-- Demande le nouveau pays -->
                     <div class="col pt-3">
                         <select name="pays" class="form-control">
                             <option value="none" selected>Choissiez un pays</option>
@@ -33,15 +46,19 @@
                             <option value="Autre">Autre</option>
                         </select>
                     </div>
+                    <!-- Demande la nouvelle adresse -->
                     <div class="col pt-3">
                         <input type="text" class="form-control" placeholder="Adresse" name="adresse" value="<?php echo($unCompte[0]['adresse']); ?>">
                     </div>
+                    <!-- Demande la nouvelle ville -->
                     <div class="col pt-3">
                         <input type="text" class="form-control" placeholder="Ville" name="ville" value="<?php echo($unCompte[0]['ville']); ?>">
                     </div>
+                    <!-- Demande le nouveau code postal -->
                     <div class="col pt-3">
                         <input type="text" class="form-control" placeholder="Code postal" name="cp" value="<?php echo($unCompte[0]['codepostal']); ?>">
                     </div>
+                    <!-- Demande le nouveau numéro de téléphone -->
                     <div class="col pt-3">
                         <input type="text" class="form-control" placeholder="Téléphone" name="telephone" value="<?php echo($unCompte[0]['telephone']); ?>">
                     </div>
@@ -78,12 +95,15 @@
         <h5 class="card-header">Changer de mot de passe</h5>
         <div class="card-body">
             <form action="compte/modifierMDP" method="post">
+                <!-- Demande l'ancien mot de passe -->
                 <div class="col pb-3">
                     <input class="form-control" type="password" name="AMDP" placeholder="Ancien mot de passe">
                 </div>
+                <!-- Demande le nouveau mot de passe -->
                 <div class="col pb-3">
                     <input class="form-control" type="password" name="MDP" placeholder="Nouveau mot de passe">
                 </div>
+                <!-- Confirmer mot de passe -->
                 <div class="col pb-3">
                     <input class="form-control" type="password" name="MDPC" placeholder="Confirmer mot de passe">
                 </div>
@@ -120,9 +140,12 @@
 <?php endif; ?>
 
 <script type="text/javascript">
+    /* Récupère la div pour afficher l'erreur */
     const divModifierInfos = document.getElementById('etatModifierInfos');
+    /* Récupère le code d'erreur et dans quel catégorie ça vient */
     let param = window.location.href.split('?')[1];
     let param2 = window.location.href.split('&')[1];
+    /* Si il y a erreur, afficher un message d'erreur */
     if(param2 != undefined || param != undefined){
         if(param.split('=')[1] != 'modifie' && param.split('=')[1] != 'MDPmodifie'){
             let value = param2.split('=')[1];
@@ -155,4 +178,4 @@
         }
     }
 </script>
-<?php require 'src/footer.php' ?>
+<?php require_once 'src/footer.php' ?>

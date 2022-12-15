@@ -1,4 +1,5 @@
-<?php require 'src/header.php' ?>
+<!-- Affichage de la page d'accueil -->
+<?php require_once 'src/header.php' ?>
 
 <!-- barre de recherche et promotion et dernières ventes -->
 <div class="container ms-2 mt-3 w-100">
@@ -83,4 +84,4 @@
   </div>
 </div>
 
-<?php require 'src/footer.php' ?>
+<?php require_once 'src/footer.php' ?>

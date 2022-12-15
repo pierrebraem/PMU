@@ -1,3 +1,4 @@
+<!-- Affiche le contenu du panier -->
 <?php 
     require_once 'src/header.php';
     require_once './models/panier.php';
@@ -5,6 +6,7 @@
 ?>
 
 <?php
+    /* Si l'utilisateur n'est pas connécté, le rediriger vers la page de connexion */
     if(empty($_SESSION)):
         header('Location: ./connexion');
     else:
@@ -82,4 +84,4 @@
 </section>
 <?php endif; ?>
 
-<?php require 'src/footer.php' ?>
+<?php require_once 'src/footer.php' ?>

@@ -1,19 +1,28 @@
+<!-- 
+Affiche tous les conseils
+Affiche les détails d'un conseil
+-->
 <?php 
     require_once 'src/header.php';
     require_once './models/conseil.php';
     $conseil = new Conseil();
+
+    /* Récupère les résultats de la recherche */
     if(isset($_GET['search'])){
         $tousConseils = $conseil->recherche($_GET['search']);
     }
+    /* Récupère les informations d'un conseil */
     elseif(isset($_GET['id'])){
         $unConseil = $conseil->getConseil($_GET['id']);
         $tousProduits = $conseil->allProduits($_GET['id']);
     }
+    /* Récupère tous les conseils */
     else{
         $tousConseils = $conseil->allConseils();
     }
 ?>
 
+<!-- Affiche les détails d'un conseil -->
 <?php if(isset($_GET['id'])): ?>
     <div class="col d-flex justify-content-center">
         <div class="card w-75 text-center">
@@ -37,7 +46,9 @@
     <div class="text-center pt-2">
         <a class="btn btn-primary" href="./conseil">Retour</a>
     </div>
+<!-- Affiche tous les conseils -->
 <?php else: ?>
+    <!-- Barre de recherche -->
     <div class="col d-flex justify-content-center">
         <div class="card w-75 text-center">
             <h5 class="card-header">Recherche</h5>
@@ -50,6 +61,7 @@
         </div>
     </div>
 
+    <!-- Les conseils -->
     <?php foreach($tousConseils as $unConseil): ?>
         <div class="col d-flex justify-content-center mt-5">
             <div class="card w-75 text-center">
@@ -67,4 +79,4 @@
     <?php endforeach; ?>
 <?php endif; ?>
 
-<?php require 'src/footer.php' ?>
+<?php require_once 'src/footer.php' ?>

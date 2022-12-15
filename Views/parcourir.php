@@ -1,19 +1,30 @@
+<!--
+Affiche la liste des produits
+Affiche le détail des produits
+-->
 <?php 
     require_once 'src/header.php';
     require_once './models/produit.php';
     $produit = new Produit();
+
+    /* Liste des promotions */
     $tousPromotions = $produit->getPromotions();
+
+    /* Récupère la liste des produits en fonction de la recherche */
     if(isset($_GET['search'])){
         $tousProduits = $produit->recherche($_GET['search']);
     }
+    /* Récupère les informations du produit */
     elseif(isset($_GET['id'])){
         $unProduit = $produit->getProduit($_GET['id']);
     }
+    /* Récupère tous les produits */
     else{
         $tousProduits = $produit->allProduits();
     }
 ?>
 
+<!-- Affiche les informations d'un produit -->
 <?php if(isset($_GET['id'])) : ?>
     <div class="col d-flex justify-content-center">
         <div class="card w-75 text-center">
@@ -48,7 +59,9 @@
             <a class="btn btn-primary" href="./parcourir">Retour</a>
         </div>
     </div>
+<!-- Affiche la liste des produits -->
 <?php else: ?>
+    <!-- Barre de recherche -->
     <div class="col d-flex justify-content-center">
         <div class="card w-75 text-center">
             <h5 class="card-header">Recherche</h5>
@@ -61,6 +74,7 @@
         </div>
     </div>
 
+    <!-- Liste des produits -->
     <?php foreach($tousProduits as $unProduit): ?>
         <div class="col d-flex justify-content-center mt-5">
             <div class="card w-75 text-center">
@@ -69,6 +83,7 @@
                     <p><?php echo($unProduit['nom']) ?></p>
                     <p><?php echo($unProduit['description']) ?></p>
                     <?php $boolPromotion = false; ?>
+                    <!-- Vérifie si il y a une promotion en cours pour le produit -->
                     <?php foreach($tousPromotions as $unePromotion): ?>
                         <?php if($unProduit['id'] == $unePromotion['id_produit']): ?>
                             <p>Était à : <?php echo($unProduit['prix']); ?>€</p>
@@ -99,4 +114,4 @@
     <?php endforeach; ?>
 <?php endif; ?>
 
-<?php require 'src/footer.php' ?>
+<?php require_once 'src/footer.php' ?>
