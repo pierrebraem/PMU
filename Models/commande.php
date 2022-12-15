@@ -40,6 +40,10 @@
             self::requete('DELETE FROM panier WHERE id = :id', array('id' => $idPanier));
         }
 
+        public function getLastCommande(){
+            return self::requete('SELECT MAX(id) AS id FROM commande');
+        }
+
         public function getInfosCommande($idCommande){
             return self::requete('SELECT * FROM commande WHERE id = :idCommande', array('idCommande' => $idCommande));
         }
