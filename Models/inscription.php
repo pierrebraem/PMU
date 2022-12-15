@@ -26,7 +26,10 @@
             $this->cp = $cp;
         }
 
-        /* Insertion des données */
+        /* Insertion des données dans la BDD pour créer un nouvel utilisateur
+        Paramètre d'entrée : aucun
+        Retourne : pas de retour
+        */
         public function insertion(){
             self::requete('INSERT INTO compte (nom, prenom, pays, adresse, ville, codepostal, telephone, mail, mdp) VALUES (:nom, :prenom, :pays, :adresse, :ville, :codepostal, :telephone, :mail, :mdp)', array(
                 'nom' => $this->nom,
@@ -41,7 +44,10 @@
             ));
         }
 
-        /* Récupère les adresses mails */
+        /* Récupère les adresses mails 
+        Paramètre d'entrée : aucun
+        Retourne : les adresses mails des comptes
+        */
         public function checkmail(){
             return self::requete('SELECT mail FROM compte');
         }

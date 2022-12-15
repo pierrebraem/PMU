@@ -6,6 +6,10 @@ require_once './includes/dompdf/autoload.inc.php';
 use Dompdf\Dompdf;
 
 class CommandeController extends Controller{
+    /* Vérifie les informations saisies par l'utilisateur
+    Pamamètre d'entrée : aucun
+    Retourne : pas de retour
+    */
     public static function commander(){
         /* Récupère les données du POST */
         $nom = $_POST['nom'];
@@ -21,18 +25,21 @@ class CommandeController extends Controller{
         $commande = new Commande();
 
         /* Gestion d'erreurs */
+        /* Vérifie que toutes les informations ont était saisis */
         if($nom == "" || $prenom == "" || $email == "" || $telephone == "" || $adresse == "" || $ville == "" || $cp == ""){
             header('Location: ../commande?etat=Enull');
             $erreur = true;
             die();
         }
 
+        /* Vérifie que le pays a était choisi */
         if($pays == "none"){
             header('Location: ../commande?etat=Epays');
             $erreur = true;
             die();
         }
 
+        /* Si il n'y a aucune erreur, alors enregistrer la commande et supprimer le contenu du panier */
         if($erreur == false){
             $commande->setCommande($commande->getContenusPanier($_SESSION['id']), $_SESSION['id'], $nom, $prenom, $email, $telephone, $pays, $adresse, $ville, $cp);
             $commande->supprimerPanier($_SESSION['id']);
@@ -41,11 +48,17 @@ class CommandeController extends Controller{
         }
     }
 
+    /* Permet de générer un PDF à partir des informations d'une commande
+    Pamamètre d'entrée : aucun
+    Retourne : pas de retour
+    */
     public static function telechargerPDF(){
+        /* Récupère l'id de la commande */
         $idCommande = $_POST['id'];
 
         $commande = new Commande();
 
+        /* Récupère les informations nécessaires à la génération du PDF */
         $infosCommande = $commande->getInfosCommande($idCommande);
         $contenusCommande = $commande->getContenusCommande($idCommande);
         $prixTotal = $commande->prixTotal($idCommande);
@@ -89,11 +102,14 @@ class CommandeController extends Controller{
         .'</html>';
 
         /* Génération pdf */
-
         $dompdf = new Dompdf();
+        /* défini les informations du PDF à partir du HTML */
         $dompdf->loadHtml($html);
+        /* Défini le format du PDF */
         $dompdf->setPaper('A4', 'portrait');
+        /* Génère le PDF */
         $dompdf->render();
+        /* Télécharge le PDF avec le nom indiquer en paramètre */
         $dompdf->stream('commande du '.$infosCommande[0]['date']);
     }
 }
