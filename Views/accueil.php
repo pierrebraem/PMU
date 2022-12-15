@@ -1,5 +1,12 @@
 <!-- Affichage de la page d'accueil -->
-<?php require_once 'src/header.php' ?>
+<?php 
+require_once 'src/header.php';
+require_once './models/categorie.php';
+
+$categorie = new Categorie();
+/* Affiche liste des 3 catégories */
+$listeCategories = $categorie->allCategories()
+?>
 
 <!-- barre de recherche et promotion et dernières ventes -->
 <div class="container ms-2 mt-3 w-100">
@@ -41,24 +48,14 @@
 <div class="card w-25 ms-3 mt-3">
   <h5 class="card-header">Catégorie</h5>
   <div class="card-body">
+    <?php foreach($listeCategories as $uneCategorie): ?>
     <ul class="list-group">
       <a href="#" class="list-group-item d-flex justify-content-between align-items-center">
-        Catégorie 1
-        <span class="badge bg-primary round-pill">9</span>
+        <?php echo($uneCategorie['nom']); ?>
+        <span class="badge bg-primary round-pill"><?php echo($uneCategorie['nombre']); ?></span>
       </a>
     </ul>
-    <ul class="list-group">
-      <a href="#" class="list-group-item d-flex justify-content-between align-items-center">
-        Catégorie 2
-        <span class="badge bg-primary round-pill">53</span>
-      </a>
-    </ul>
-    <ul class="list-group">
-      <a href="#" class="list-group-item d-flex justify-content-between align-items-center">
-        Catégorie 3
-        <span class="badge bg-primary round-pill">15</span>
-      </a>
-    </ul>
+    <?php endforeach; ?>
   </div>
 </div>
 
