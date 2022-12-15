@@ -3,11 +3,21 @@ Affiche les informations du compte
 Affiche le formulaire de modification du compte
 Affiche le formulaire pour changer le mot de passe
 Affiche l'historique des commandes du compte
+Affiche les détails d'une commande
 -->
 <?php 
     require_once 'src/header.php';
     require_once './models/compte.php';
+    require_once './models/commande.php';
+
     $compte = new Compte();
+    $commande = new Commande();
+
+    /* Récupère les détails d'une commande */
+    if(isset($_GET['detailCommande'])){
+        $uneCommande = $commande->getInfosCommande($_GET['detailCommande']);
+        $listeProduits = $commande->getContenusCommande($_GET['detailCommande']);
+    }
 
     /* Récupère les informations du compte ainsi que son historique des commandes */
     $unCompte = $compte->getCompte($_SESSION['id']);
@@ -69,6 +79,40 @@ Affiche l'historique des commandes du compte
             </div>
         </div>
     </div>
+<!-- Affiche les détails d'une commande -->
+<?php elseif(isset($_GET['detailCommande'])): ?>
+    <div class="col d-flex justify-content-center">
+        <div class="card w-75 text-center">
+            <img class="card-img-top" src="<?php echo($unConseil[0]['image']) ?>">
+            <div class="card-body">
+                <p>Nom : <?php echo($uneCommande[0]['nom']) ?></p>
+                <p>Prénom : <?php echo($uneCommande[0]['prenom']) ?></p>
+                <p>Adresse : <?php echo($uneCommande[0]['adresse']); ?> <?php echo($uneCommande[0]['codepostal']); ?>, <?php echo($uneCommande[0]['ville']); ?>, <?php echo($uneCommande[0]['pays']); ?></p>
+                <div class="col d-flex justify-content-center">
+                    <table>
+                        <thead>
+                            <th>Image</th>
+                            <th>Nom</th>
+                            <th>Description</th>
+                            <th>Quantité</th>
+                            <th>Prix</th>
+                        </thead>
+                        <tbody>
+                        <?php foreach($listeProduits as $unProduit): ?>
+                            <tr>
+                                <td><img src="<?php echo($unProduit['image']); ?>"></td>
+                                <td><?php echo($unProduit['nom']); ?></td>
+                                <td><?php echo($unProduit['description']); ?></td>
+                                <td><?php echo($unProduit['quantite']); ?></td>
+                                <td><?php echo($unProduit['prix']); ?></td>
+                            <tr>
+                        <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 <?php else: ?>
 
 <!-- Informations compte -->
@@ -126,7 +170,10 @@ Affiche l'historique des commandes du compte
                 <?php foreach($commandes as $uneCommande): ?>
                     <li class="list-group-item">
                         <p>Commande du <?php echo($uneCommande['date']); ?></p>
-                        <a class="btn btn-primary" href="./compte?DetailCommande=<?php echo($uneCommande['id']); ?>">Détail</a>
+                        <form action="commande/detailCommande" method="post">
+                            <input type="hidden" name="id" value="<?php echo($uneCommande['id']); ?>">
+                            <input type="submit" class="btn btn-primary" value="Détail">
+                        </form>
                         <form action="commande/telecharger" method="post">
                             <input type="hidden" name="id" value="<?php echo($uneCommande['id']); ?>">
                             <input type="submit" class="btn btn-danger" value="Télécharger PDF">

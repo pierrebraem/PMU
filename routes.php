@@ -78,6 +78,10 @@
             CommandeController::commander();
         });
 
+        Route::set('commande/detailCommande', function(){
+            CommandeController::detailCommande();
+        });
+
         Route::set('commande/telecharger', function(){
             CommandeController::telechargerPDF();
         });

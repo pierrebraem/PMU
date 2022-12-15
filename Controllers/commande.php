@@ -48,6 +48,15 @@ class CommandeController extends Controller{
         }
     }
 
+    /* Permet d'afficher les détails d'une commande
+    Pamamètre d'entrée : aucun
+    Retourne : pas de retour
+    */
+    public static function detailCommande(){
+        $id = $_POST['id'];
+        header('Location: ../compte?detailCommande='.$id);
+    }
+
     /* Permet de générer un PDF à partir des informations d'une commande
     Pamamètre d'entrée : aucun
     Retourne : pas de retour
