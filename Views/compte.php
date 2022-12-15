@@ -107,7 +107,10 @@
                     <li class="list-group-item">
                         <p>Commande du <?php echo($uneCommande['date']); ?></p>
                         <a class="btn btn-primary" href="./compte?DetailCommande=<?php echo($uneCommande['id']); ?>">Détail</a>
-                        <a class="btn btn-danger" href="#">Télécharger PDF</a>
+                        <form action="commande/telecharger" method="post">
+                            <input type="hidden" name="id" value="<?php echo($uneCommande['id']); ?>">
+                            <input type="submit" class="btn btn-danger" value="Télécharger PDF">
+                        </form>
                     </li>
                 <?php endforeach; ?>
             <?php endif; ?>

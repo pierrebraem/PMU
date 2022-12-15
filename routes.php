@@ -78,6 +78,10 @@
             CommandeController::commander();
         });
 
+        Route::set('commande/telecharger', function(){
+            CommandeController::telechargerPDF();
+        });
+
         /* Route pour la déconnexion */
         Route::set('connexion/deconnection', function(){
             ConnexionController::deconnexion();

@@ -2,40 +2,18 @@
     require_once './classes/connexionBDD.php';
 
     class Commande extends BDD{
-        /* Variables */
-        private $nom;
-        private $prenom;
-        private $email;
-        private $telephone;
-        private $pays;
-        private $adresse;
-        private $ville;
-        private $cp;
-
-        /* Constructeur */
-        public function __construct($nom, $prenom, $email, $telephone, $pays, $adresse, $ville, $cp){
-            $this->nom = $nom;
-            $this->prenom = $prenom;
-            $this->email = $email;
-            $this->telephone = $telephone;
-            $this->pays = $pays;
-            $this->adresse = $adresse;
-            $this->ville = $ville;
-            $this->cp = $cp;
-        }
-
         public function getContenusPanier($idCompte){
             return self::requete('SELECT pp.id_produit, pp.quantite FROM panier p INNER JOIN panier_produit pp ON p.id = pp.id_panier WHERE p.id_compte = :id', array('id' => $idCompte));
         }
 
-        public function setCommande($listePanier, $idCompte){
+        public function setCommande($listePanier, $idCompte, $nom, $prenom, $email, $telephone, $pays, $adresse, $ville, $cp){
             self::requete('INSERT INTO commande(nom, prenom, pays, adresse, ville, codepostal, date, id_compte) VALUES (:nom, :prenom, :pays, :adresse, :ville, :codepostal, NOW(), :idCompte)', array(
-                'nom' => $this->nom,
-                'prenom' => $this->prenom,
-                'pays' => $this->pays,
-                'adresse' => $this->adresse,
-                'ville' => $this->ville,
-                'codepostal' => $this->cp,
+                'nom' => $nom,
+                'prenom' => $prenom,
+                'pays' => $pays,
+                'adresse' => $adresse,
+                'ville' => $ville,
+                'codepostal' => $cp,
                 'idCompte' => $idCompte
             ));
 
@@ -60,6 +38,25 @@
             $idPanier = self::requete('SELECT id FROM panier WHERE id_compte = :idCompte', array('idCompte' => $idCompte))[0]['id'];
             self::requete('DELETE FROM panier_produit WHERE id_panier = :id', array('id' => $idPanier));
             self::requete('DELETE FROM panier WHERE id = :id', array('id' => $idPanier));
+        }
+
+        public function getInfosCommande($idCommande){
+            return self::requete('SELECT * FROM commande WHERE id = :idCommande', array('idCommande' => $idCommande));
+        }
+
+        public function getContenusCommande($idCommande){
+            return self::requete('SELECT p.image, p.nom, p.description, cp.quantite, cp.prix FROM commande_produit cp INNER JOIN produit p ON cp.id_produit = p.id WHERE cp.id_commande = :idCommande', array('idCommande' => $idCommande));
+        }
+
+        public function prixTotal($idCommande){
+            $prixTotal = 0;
+            $tousArticles = self::requete('SELECT prix, quantite FROM commande_produit WHERE id_commande = :idCommande', array('idCommande' => $idCommande));
+
+            foreach($tousArticles as $unArticle){
+                $prixTotal = $prixTotal + $unArticle['prix'] * $unArticle['quantite'];
+            }
+
+            return $prixTotal;
         }
     }
 ?>
