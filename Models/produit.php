@@ -31,7 +31,7 @@
         Retourne : les produits en réduction
         */
         public function getPromotions(){
-            return self::requete('SELECT ROUND((prod.prix * (100-prom.rabais)) / 100, 2) AS \'prixReduit\', prom.id_produit, prom.date_fin FROM produit prod INNER JOIN promotion prom ON prod.id = prom.id_produit;');
+            return self::requete('SELECT ROUND((prod.prix * (100-prom.rabais)) / 100, 2) AS \'prixReduit\', prom.id_produit, prod.nom, prod.prix, prom.date_fin FROM produit prod INNER JOIN promotion prom ON prod.id = prom.id_produit;');
         }
     }
 ?>

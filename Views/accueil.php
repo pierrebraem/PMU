@@ -3,15 +3,20 @@
 require_once 'src/header.php';
 require_once './models/categorie.php';
 require_once './models/conseil.php';
+require_once './models/produit.php';
 
 $categorie = new Categorie();
 $conseil = new Conseil();
+$produit = new Produit();
 
 /* Liste des 3 catégories */
 $listeCategories = $categorie->allCategories();
 
 /* Liste des conseils */
 $listeConseils = $conseil->allConseils();
+
+/* Liste des produits en promotions */
+$listeProduits = $produit->getPromotions();
 ?>
 
 <!-- barre de recherche et promotion et dernières ventes -->
@@ -31,7 +36,12 @@ $listeConseils = $conseil->allConseils();
     <div class="col-lg-4 ms-5">
       <div class="card h-100">
         <div class="card-body">
-          Afficher les promotions
+          <?php foreach($listeProduits as $unProduit): ?>
+            <ul class="list-group">
+              <p><?php echo($unProduit['nom']); ?></p>
+              <p><?php echo($unProduit['prixReduit']); ?>€ au lieu de <?php echo($unProduit['prix']); ?></p>
+            </ul>
+          <?php endforeach; ?>
         </div>
       </div>
     </div>
