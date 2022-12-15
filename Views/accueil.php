@@ -2,10 +2,16 @@
 <?php 
 require_once 'src/header.php';
 require_once './models/categorie.php';
+require_once './models/conseil.php';
 
 $categorie = new Categorie();
-/* Affiche liste des 3 catégories */
-$listeCategories = $categorie->allCategories()
+$conseil = new Conseil();
+
+/* Liste des 3 catégories */
+$listeCategories = $categorie->allCategories();
+
+/* Liste des conseils */
+$listeConseils = $conseil->allConseils();
 ?>
 
 <!-- barre de recherche et promotion et dernières ventes -->
@@ -63,21 +69,14 @@ $listeCategories = $categorie->allCategories()
 <div class="card w-25 ms-3 mt-3">
   <h5 class="card-header">Conseil</h5>
   <div class="card-body">
+    <?php foreach($listeConseils as $unConseil): ?>
     <ul class="list-group">
-      <a href="#" class="list-group-item d-flex justify-content-between align-items-center">
-        Conseil
-      </a>
+      <form action="conseil/detail" method="post">
+        <input type="hidden" name="id" value="<?php echo($unConseil['id']) ?>">
+        <button class="list-group-item d-flex justify-content-between align-items-center" type="sumbit"><?php echo($unConseil['nom']); ?></button>
+      </form>
     </ul>
-    <ul class="list-group">
-      <a href="#" class="list-group-item d-flex justify-content-between align-items-center">
-        Conseil 2
-      </a>
-    </ul>
-    <ul class="list-group">
-      <a href="#" class="list-group-item d-flex justify-content-between align-items-center">
-        Conseil 3
-      </a>
-    </ul>
+    <?php endforeach; ?>
   </div>
 </div>
 
